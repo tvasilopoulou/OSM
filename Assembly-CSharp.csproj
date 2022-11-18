@@ -291,6 +291,8 @@
      <Compile Include="Assets\Infinity Code\Online maps\Scripts\XML\OnlineMapsXMLNamespaceManager.cs" />
      <Compile Include="Assets\Scripts\CreatePin.cs" />
      <Compile Include="Assets\Scripts\Positions.cs" />
+     <Compile Include="Assets\Scripts\Routes.cs" />
+     <Compile Include="Assets\Scripts\StaticCameras.cs" />
      <None Include="Assets\MRTK\StandardAssets\Shaders\Text3DShader.shader" />
      <None Include="Assets\Infinity Code\Online maps\Shaders\TilesetDrawingElementZTestAlways.shader" />
      <None Include="Assets\MRTK\StandardAssets\Shaders\InstancedColored.shader" />

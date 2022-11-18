@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 922117120}
   - component: {fileID: 922117131}
   - component: {fileID: 922117123}
+  - component: {fileID: 922117132}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -333,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800307c426dd863468f304303b80dfe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottomMode: 0
+  bottomMode: 1
   scale: 1
   zoomRange:
     max: 10.999001
@@ -344,7 +345,7 @@ MonoBehaviour:
   yScaleValue: 1
   tweenUpdateValues: 0
   tweenDuration: 0.5
-  bingAPI: 
+  bingAPI: AnHErNv6-LpTcjt8zVOKIGCXICR-K9xAGJfN2imFc3jDWwF_6ssYlFXf_9DVxizv
 --- !u!114 &922117123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,14 +404,14 @@ MonoBehaviour:
   generateColliders: 1
   heightScale: 1
   materials: []
-  maxActiveBuildings: 50
-  maxBuilding: 50
+  maxActiveBuildings: 0
+  maxBuilding: 0
   minHeight: 4.5
   useColorTag: 1
   useHeightTag: 1
   zoomRange:
-    max: 2.999
-    min: 1
+    max: 14.643646
+    min: 12.644646
     maxLimit: 20.999
     minLimit: 1
 --- !u!114 &922117126
@@ -513,12 +514,12 @@ MonoBehaviour:
   dragMarkerHoldingCTRL: 0
   emptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   height: 1024
-  labels: 0
+  labels: 1
   language: en
   lockRedraw: 0
   needRedraw: 1
   notInteractUnderGUI: 1
-  mapType: arcgis.worldimagery
+  mapType: virtualearth.aerial
   osmServer: 0
   proxyURL: https://service.infinity-code.com/redirect.php?
   redrawOnPlay: 1
@@ -538,9 +539,9 @@ MonoBehaviour:
   useSoftwareJPEGDecoder: 0
   width: 1024
   _activeTypeSettings: 
-  _zoom: 18
-  latitude: 38
-  longitude: 24
+  _zoom: 4
+  latitude: 24.4977909968252
+  longitude: 21.5559449730722
 --- !u!4 &922117130
 Transform:
   m_ObjectHideFlags: 0
@@ -582,6 +583,18 @@ MonoBehaviour:
   truckcar: {fileID: 2800000, guid: a0773d1559ee4f446b0f72db50015396, type: 3}
   ugv: {fileID: 2800000, guid: 5f90be2ba2d785c4b82cd4d540fea1db, type: 3}
   uav: {fileID: 2800000, guid: b9505501a2c98cc469bec922910d4154, type: 3}
+--- !u!114 &922117132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922117119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c88e5a286a484547a7b271d15e84f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

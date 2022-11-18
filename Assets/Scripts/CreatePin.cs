@@ -11,6 +11,8 @@ using TMPro;
 
 public class CreatePin : MonoBehaviour
 {
+    private OnlineMaps map;
+
     public Texture2D ambulance;
     public Texture2D cam;
     public Texture2D cod;
@@ -44,6 +46,7 @@ public class CreatePin : MonoBehaviour
 
     void Start()
     {
+        map = OnlineMaps.instance;
         OnlineMapsMarkerList = new List<OnlineMapsMarker>();
         IDList = new List<string>();
 
@@ -72,6 +75,7 @@ public class CreatePin : MonoBehaviour
                 if(marker.label.Contains(data.id)){
                     marker.position = new Vector2(data.latitude,data.longitude);
                     marker.label = label;
+                    map.Redraw();
                     break;
                 }
             }

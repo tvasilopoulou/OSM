@@ -102,7 +102,6 @@ public class Positions : MonoBehaviour
 
                 } while (!result.EndOfMessage);
                  
-                Debug.Log(result.Count);
 
                 ms.Seek(0, SeekOrigin.Begin);
 
@@ -116,13 +115,12 @@ public class Positions : MonoBehaviour
                             continue;
                         }
                         else if(message.Contains("routes")){
-                            Debug.Log("should not print");
                             OnRoutesReceived(message);
                             continue;
                         }
 
                         text.text = message;
-
+                        Debug.Log(message);
                         // PositionDataType data = JsonUtility.FromJson<PositionDataType>(message);
 
                         // // this is needed to have the correct decimal digits!!
