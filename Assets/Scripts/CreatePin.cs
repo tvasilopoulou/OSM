@@ -7,6 +7,8 @@ using System.IO;
 using System;
 using TMPro;
 
+[AddComponentMenu("Infinity Code/Online Maps/Examples (API Usage)/uGUICustomTooltipForAllMarkersExample")]
+
     
 
 public class CreatePin : MonoBehaviour
@@ -31,6 +33,7 @@ public class CreatePin : MonoBehaviour
     
     private List<OnlineMapsMarker> OnlineMapsMarkerList;
     private List<string> IDList;
+    private GameObject tooltip;
 
     class Telemetry{
         public float latitude;
@@ -49,6 +52,7 @@ public class CreatePin : MonoBehaviour
         map = OnlineMaps.instance;
         OnlineMapsMarkerList = new List<OnlineMapsMarker>();
         IDList = new List<string>();
+        OnlineMapsMarkerBase.OnMarkerDrawTooltip = delegate { };
 
         Positions.OnReceived += Place;
         
@@ -56,29 +60,44 @@ public class CreatePin : MonoBehaviour
 
     void Place(string jsonMessage)
     {
-        Telemetry data = JsonUtility.FromJson<Telemetry>(jsonMessage);
+        OnlineMapsMarker tooltipMarker = OnlineMapsTooltipDrawerBase.tooltipMarker as OnlineMapsMarker;
+        if (tooltipMarker != null){
+            Telemetry data = JsonUtility.FromJson<Telemetry>(jsonMessage);
 
-        string label = data.item.ToUpper() + data.id + System.Environment.NewLine + "Lat: " + data.latitude + ", Lon: " + data.longitude + System.Environment.NewLine + 
-                        "Speed: " + data.speed + System.Environment.NewLine + "Altitude: " + data.altitude;
-        
+            string label = data.item.ToUpper() + data.id + System.Environment.NewLine + "Lat: " + data.latitude + ", Lon: " + data.longitude + System.Environment.NewLine + 
+                            "Speed: " + data.speed + System.Environment.NewLine + "Altitude: " + data.altitude;
+            
 
-        if(!IDList.Contains(data.id)){
-            OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2(data.latitude,data.longitude), itemLocated(data.item), label);
-            marker.scale = 0.5f;
+            if(!IDList.Contains(data.id)){
+                OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2(data.latitude,data.longitude), itemLocated(data.item), label);
+                marker.scale = 0.5f;
 
-            OnlineMapsMarkerList.Add(marker);
-            IDList.Add(data.id);
-        }
-         
-        else{
-            foreach(OnlineMapsMarker marker in OnlineMapsMarkerList){
-                if(marker.label.Contains(data.id)){
-                    marker.position = new Vector2(data.latitude,data.longitude);
-                    marker.label = label;
-                    map.Redraw();
-                    break;
+                OnlineMapsMarkerList.Add(marker);
+                IDList.Add(data.id);
+            }
+            
+            else{
+                foreach(OnlineMapsMarker marker in OnlineMapsMarkerList){
+                    if(marker.label.Contains(data.id)){
+                        marker.position = new Vector2(data.latitude,data.longitude);
+                        marker.label = label;
+                        map.Redraw();
+                        break;
+                    }
                 }
             }
+            Vector2 screenPosition = OnlineMapsControlBase.instance.GetScreenPosition(tooltipMarker.position);
+            screenPosition.y += tooltipMarker.height;
+            Vector2 point;
+            Camera cam = container.renderMode == RenderMode.ScreenSpaceOverlay ? null : container.worldCamera;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(container.transform as RectTransform, screenPosition, cam, out point);
+            (tooltip.transform as RectTransform).localPosition = point;
+            tooltip.GetComponentInChildren<Text>().text = tooltipMarker.label;
+
+        }
+        else{
+            OnlineMapsUtils.Destroy(tooltip);
+            tooltip = null;
         }
 
 

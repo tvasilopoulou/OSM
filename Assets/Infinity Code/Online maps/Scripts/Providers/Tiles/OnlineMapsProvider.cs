@@ -43,7 +43,7 @@ public class OnlineMapsProvider
     public bool? hasLabels;
 
     /// <summary>
-    /// Indicates that the label is always enabled.
+    /// Indicates that the  is always enabled.
     /// </summary>
     public bool? labelsEnabled;
 
