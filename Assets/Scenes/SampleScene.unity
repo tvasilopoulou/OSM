@@ -526,7 +526,7 @@ MonoBehaviour:
   renderInThread: 0
   resourcesPath: OnlineMapsTiles/{zoom}/{x}/{y}
   streamingAssetsPath: OnlineMapsTiles/{zoom}/{x}/{y}.png
-  showMarkerTooltip: 2
+  showMarkerTooltip: 1
   source: 0
   stopPlayingWhenScriptsCompile: 1
   texture: {fileID: 0}
