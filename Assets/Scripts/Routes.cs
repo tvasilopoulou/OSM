@@ -33,6 +33,8 @@ public class Routes : MonoBehaviour
     }
 
     private OnlineMaps map;
+    private OnlineMapsDrawingPoly polygon;
+    public float borderWidth = 1;
 
     
     void Start()
@@ -63,7 +65,17 @@ public class Routes : MonoBehaviour
 
             }
             OnlineMapsDrawingElementManager.AddItem(new OnlineMapsDrawingLine(routeLine, Color.black, 2));
+            if (polygon == null)
+            {
+                // For points, reference to markerPositions. 
+                // If you change the values ​​in markerPositions, value in the polygon will be adjusted automatically.
+                polygon = new OnlineMapsDrawingPoly(routeLine, Color.black, borderWidth, new Color(1, 1, 1, 0.3f));
+
+                // Add an element to the map.
+                OnlineMapsDrawingElementManager.AddItem(polygon);
+            }
             routeLine = null;
+            polygon = null;
 
         }
 

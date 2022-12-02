@@ -106,7 +106,7 @@ public class OnlineMapsBingMapsElevationManager : OnlineMapsSinglePartElevationM
                     elevationDataWidth = elevationDataResolution;
                     elevationDataHeight = elevationDataResolution;
                 }
-                Debug.LogWarning(response);
+                // Debug.LogWarning(response);
                 if (OnElevationFails != null) OnElevationFails(response);
             }
             elevationRequest = null;

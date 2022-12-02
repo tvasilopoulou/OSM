@@ -64,8 +64,7 @@ public class CreatePin : MonoBehaviour
             OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2(data.longitude,data.latitude), itemLocated(data.item), label);
             marker.OnClick += OnMarkerClick;
             GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
-            marker.scale = 0.5f;                
-
+            marker.scale = 0.5f;
             OnlineMapsMarkerList.Add(marker);
             IDList.Add(data.id);
         }
@@ -107,5 +106,13 @@ public class CreatePin : MonoBehaviour
         else if(item.IndexOf("uav", StringComparison.OrdinalIgnoreCase) >= 0) return uav;
         else return riskmoderate;
 
+    }
+
+    public void OnPlusClick(){
+        if (map.zoom <= 19) map.zoom += 1;
+    }
+
+    public void OnMinusClick(){
+        if (map.zoom >= 1) map.zoom -= 1;
     }
 }
