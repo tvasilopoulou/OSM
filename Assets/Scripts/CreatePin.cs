@@ -61,7 +61,9 @@ public class CreatePin : MonoBehaviour
         
 
         if(!IDList.Contains(data.id)){
-            OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2(data.latitude,data.longitude), itemLocated(data.item), label);
+            OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2(data.longitude,data.latitude), itemLocated(data.item), label);
+            marker.OnClick += OnMarkerClick;
+            GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
             marker.scale = 0.5f;                
 
             OnlineMapsMarkerList.Add(marker);
@@ -71,8 +73,9 @@ public class CreatePin : MonoBehaviour
         else{
             foreach(OnlineMapsMarker marker in OnlineMapsMarkerList){
                 if(marker.label.Contains(data.id)){
-                    marker.position = new Vector2(data.latitude,data.longitude);
+                    marker.position = new Vector2(data.longitude,data.latitude);
                     marker.label = label;
+                    GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
                     map.Redraw();
                     break;
                 }
@@ -81,7 +84,10 @@ public class CreatePin : MonoBehaviour
         
     }
 
-
+    private void OnMarkerClick(OnlineMapsMarkerBase marker){
+        // Show in console marker label.
+        Debug.Log(marker.label);
+    }
 
     private Texture2D itemLocated(string item){
         if(item.IndexOf("ambulance", StringComparison.OrdinalIgnoreCase) >= 0) return ambulance;
