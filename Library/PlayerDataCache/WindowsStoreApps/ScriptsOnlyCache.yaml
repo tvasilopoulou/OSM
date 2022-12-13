@@ -3,6 +3,8 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - CreatePin
     - InfinityCode.OnlineMapsDemos.SmoothZoomOnMouseEvents
+    - InfinityCode.OnlineMapsExamples.BingMapsElevationsExample
+    - InfinityCode.OnlineMapsExamples.DragAndZoomInertia
     - OnlineMaps
     - OnlineMapsBingMapsElevationManager
     - OnlineMapsBuildings
@@ -30,8 +32,13 @@ ScriptsOnlyBuild:
     - Microsoft.MixedReality.Toolkit.Input.SpherePointerGrabPoint
     - Microsoft.MixedReality.Toolkit.Input.SpherePointerVisual
     - Microsoft.MixedReality.Toolkit.Input.TouchPointer
+    - Microsoft.MixedReality.Toolkit.SubmitEventRouter
     - Microsoft.MixedReality.Toolkit.Teleport.ParabolicTeleportPointer
     - Microsoft.MixedReality.Toolkit.Teleport.TeleportCursor
+    - Microsoft.MixedReality.Toolkit.UI.Interactable
+    - Microsoft.MixedReality.Toolkit.UI.PressableButton
+    - Microsoft.MixedReality.Toolkit.UI.States
+    - Microsoft.MixedReality.Toolkit.UI.Theme
     Microsoft.MixedReality.Toolkit.Services.InputAnimation.dll:
     - Microsoft.MixedReality.Toolkit.Input.MixedRealityInputRecordingProfile
     Microsoft.MixedReality.Toolkit.Services.InputSimulation.dll:
@@ -41,6 +48,7 @@ ScriptsOnlyBuild:
     - Microsoft.MixedReality.Toolkit.Input.MixedRealityInputModule
     - Microsoft.MixedReality.Toolkit.Input.NearInteractionTouchableUnityUI
     - Microsoft.MixedReality.Toolkit.Input.Utilities.CanvasUtility
+    - Microsoft.MixedReality.Toolkit.Input.Utilities.ScaleMeshEffect
     Microsoft.MixedReality.Toolkit.dll:
     - Microsoft.MixedReality.Toolkit.Boundary.MixedRealityBoundaryVisualizationProfile
     - Microsoft.MixedReality.Toolkit.Diagnostics.MixedRealityDiagnosticsProfile
@@ -83,8 +91,10 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.Image
     - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/SampleScene.unity:
@@ -127,6 +137,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11338}
     - Class: 114
+      Script: {instanceID: 11340}
+    - Class: 114
       Script: {instanceID: 11368}
     - Class: 114
       Script: {instanceID: 11390}
@@ -139,13 +151,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11536}
     - Class: 114
+      Script: {instanceID: 11580}
+    - Class: 114
       Script: {instanceID: 11584}
     - Class: 114
       Script: {instanceID: 11662}
     - Class: 114
       Script: {instanceID: 11682}
     - Class: 114
+      Script: {instanceID: 11844}
+    - Class: 114
       Script: {instanceID: 11852}
+    - Class: 114
+      Script: {instanceID: 11872}
+    - Class: 114
+      Script: {instanceID: 11910}
     - Class: 114
       Script: {instanceID: 11954}
     - Class: 114
@@ -164,6 +184,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12494}
     - Class: 114
       Script: {instanceID: 12590}
+    - Class: 114
+      Script: {instanceID: 12618}
     - Class: 114
       Script: {instanceID: 12624}
     - Class: 114
@@ -184,6 +206,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12932}
     - Class: 114
       Script: {instanceID: 13178}
+    - Class: 114
+      Script: {instanceID: 13256}
     - Class: 114
       Script: {instanceID: 13266}
     - Class: 114
@@ -211,6 +235,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14110}
     - Class: 114
+      Script: {instanceID: 14130}
+    - Class: 114
       Script: {instanceID: 14248}
     - Class: 114
       Script: {instanceID: 14270}
@@ -222,6 +248,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14374}
     - Class: 114
       Script: {instanceID: 14394}
+    - Class: 114
+      Script: {instanceID: 14484}
+    - Class: 114
+      Script: {instanceID: 14540}
     - Class: 114
       Script: {instanceID: 14792}
     - Class: 114
@@ -845,7 +875,7 @@ ScriptsOnlyBuild:
     className: SignalAsset
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 5a49c9c72403ec0ba83fa2252a072daa
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Routes
@@ -1415,7 +1445,7 @@ ScriptsOnlyBuild:
     className: NearInteractionGrabbable
   - hash:
       serializedVersion: 2
-      Hash: 4e7308bbc8061cea45a5c6e67440dba8
+      Hash: b432352d5413a6aa6c6047a703b9bacf
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CreatePin

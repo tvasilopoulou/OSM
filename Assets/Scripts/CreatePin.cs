@@ -30,6 +30,16 @@ public class CreatePin : MonoBehaviour
     
     private List<OnlineMapsMarker> OnlineMapsMarkerList;
     private List<string> IDList;
+    private GameObject tooltip;
+
+    public OnlineMapsRawImageTouchForwarder forwarder;
+
+    public GameObject tooltipPrefab;
+    public Canvas container;
+    public Material onToggle;
+    public Material offToggle;
+
+    private int flag = 0;
 
     class Telemetry{
         public float latitude;
@@ -59,11 +69,11 @@ public class CreatePin : MonoBehaviour
         string label = data.item.ToUpper() + data.id + System.Environment.NewLine + "Lat: " + data.latitude + ", Lon: " + data.longitude + System.Environment.NewLine + 
                         "Speed: " + data.speed + System.Environment.NewLine + "Altitude: " + data.altitude;
         
-
+        
         if(!IDList.Contains(data.id)){
             OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2(data.longitude,data.latitude), itemLocated(data.item), label);
             marker.OnClick += OnMarkerClick;
-            GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
+            if (flag == 1) GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
             marker.scale = 0.5f;
             OnlineMapsMarkerList.Add(marker);
             IDList.Add(data.id);
@@ -74,7 +84,7 @@ public class CreatePin : MonoBehaviour
                 if(marker.label.Contains(data.id)){
                     marker.position = new Vector2(data.longitude,data.latitude);
                     marker.label = label;
-                    GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
+                    if (flag == 1) GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
                     map.Redraw();
                     break;
                 }
@@ -114,5 +124,17 @@ public class CreatePin : MonoBehaviour
 
     public void OnMinusClick(){
         if (map.zoom >= 1) map.zoom -= 1;
+    }
+
+    public void onInfoClick(){
+        if (flag == 0){
+            GameObject.Find("Quad").GetComponent<MeshRenderer>().material = onToggle;
+            flag= 1;
+        }
+        else {
+            GameObject.Find("Quad").GetComponent<MeshRenderer>().material = offToggle;
+            GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = "";
+            flag = 0;
+        }
     }
 }
