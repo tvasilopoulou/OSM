@@ -70,18 +70,18 @@ public class CreatePin : MonoBehaviour
                         "Speed: " + data.speed + System.Environment.NewLine + "Altitude: " + data.altitude;
         
         
-        if(!IDList.Contains(data.id)){
+        if(!IDList.Contains(data.item + data.id)){
             OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2(data.longitude,data.latitude), itemLocated(data.item), label);
             marker.OnClick += OnMarkerClick;
             if (flag == 1) GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
             marker.scale = 0.5f;
             OnlineMapsMarkerList.Add(marker);
-            IDList.Add(data.id);
+            IDList.Add(data.item + data.id);
         }
         
         else{
             foreach(OnlineMapsMarker marker in OnlineMapsMarkerList){
-                if(marker.label.Contains(data.id)){
+                if(marker.label.Contains(data.item.ToUpper() + data.id)){
                     marker.position = new Vector2(data.longitude,data.latitude);
                     marker.label = label;
                     if (flag == 1) GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;

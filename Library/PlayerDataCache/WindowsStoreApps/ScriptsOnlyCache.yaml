@@ -32,11 +32,15 @@ ScriptsOnlyBuild:
     - Microsoft.MixedReality.Toolkit.Input.SpherePointerGrabPoint
     - Microsoft.MixedReality.Toolkit.Input.SpherePointerVisual
     - Microsoft.MixedReality.Toolkit.Input.TouchPointer
+    - Microsoft.MixedReality.Toolkit.PhysicalPressEventRouter
     - Microsoft.MixedReality.Toolkit.SubmitEventRouter
     - Microsoft.MixedReality.Toolkit.Teleport.ParabolicTeleportPointer
     - Microsoft.MixedReality.Toolkit.Teleport.TeleportCursor
+    - Microsoft.MixedReality.Toolkit.UI.ButtonConfigHelper
+    - Microsoft.MixedReality.Toolkit.UI.ButtonIconSet
     - Microsoft.MixedReality.Toolkit.UI.Interactable
     - Microsoft.MixedReality.Toolkit.UI.PressableButton
+    - Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2
     - Microsoft.MixedReality.Toolkit.UI.States
     - Microsoft.MixedReality.Toolkit.UI.Theme
     Microsoft.MixedReality.Toolkit.Services.InputAnimation.dll:
@@ -46,6 +50,7 @@ ScriptsOnlyBuild:
     Microsoft.MixedReality.Toolkit.Services.InputSystem.dll:
     - Microsoft.MixedReality.Toolkit.Input.GazeProvider
     - Microsoft.MixedReality.Toolkit.Input.MixedRealityInputModule
+    - Microsoft.MixedReality.Toolkit.Input.NearInteractionTouchable
     - Microsoft.MixedReality.Toolkit.Input.NearInteractionTouchableUnityUI
     - Microsoft.MixedReality.Toolkit.Input.Utilities.CanvasUtility
     - Microsoft.MixedReality.Toolkit.Input.Utilities.ScaleMeshEffect
@@ -118,6 +123,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 49
       Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
@@ -179,9 +186,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12274}
     - Class: 114
+      Script: {instanceID: 12308}
+    - Class: 114
+      Script: {instanceID: 12366}
+    - Class: 114
       Script: {instanceID: 12448}
     - Class: 114
       Script: {instanceID: 12494}
+    - Class: 114
+      Script: {instanceID: 12544}
     - Class: 114
       Script: {instanceID: 12590}
     - Class: 114
@@ -229,6 +242,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13934}
     - Class: 114
+      Script: {instanceID: 13990}
+    - Class: 114
       Script: {instanceID: 14066}
     - Class: 114
       Script: {instanceID: 14082}
@@ -238,6 +253,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14130}
     - Class: 114
       Script: {instanceID: 14248}
+    - Class: 114
+      Script: {instanceID: 14258}
     - Class: 114
       Script: {instanceID: 14270}
     - Class: 114
@@ -301,6 +318,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -1445,7 +1464,7 @@ ScriptsOnlyBuild:
     className: NearInteractionGrabbable
   - hash:
       serializedVersion: 2
-      Hash: b432352d5413a6aa6c6047a703b9bacf
+      Hash: aa00835ed7f26277a855c0b5e757aad2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CreatePin
