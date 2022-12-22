@@ -40,6 +40,10 @@ public class CreatePin : MonoBehaviour
     public Material offToggle;
 
     private int flag = 0;
+    private int roundCoords = 0;
+
+    protected double latit;
+    protected double longit;
 
     class Telemetry{
         public float latitude;
@@ -65,10 +69,23 @@ public class CreatePin : MonoBehaviour
     void Place(string jsonMessage)
     {
         Telemetry data = JsonUtility.FromJson<Telemetry>(jsonMessage);
-
-        string label = data.item.ToUpper() + data.id + System.Environment.NewLine + "Lat: " + data.latitude + ", Lon: " + data.longitude + System.Environment.NewLine + 
-                        "Speed: " + data.speed + System.Environment.NewLine + "Altitude: " + data.altitude;
         
+        latit = data.latitude;
+        longit = data.longitude;
+
+        if(data.speed == "0") return;
+
+        double roundedLat = Math.Round(data.latitude, 3);
+        double roundedLon = Math.Round(data.longitude, 3);
+
+        if (roundCoords != 0){
+            roundedLat = data.latitude;
+            roundedLon = data.longitude;
+        }
+
+
+        string label = data.item.ToUpper() + data.id + System.Environment.NewLine + "Lat: " + roundedLat + ", Lon: " + roundedLon + System.Environment.NewLine + 
+                        "Speed: " + data.speed + "m/s" + System.Environment.NewLine + "Altitude: " + data.altitude + "m";
         
         if(!IDList.Contains(data.item + data.id)){
             OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2(data.longitude,data.latitude), itemLocated(data.item), label);
@@ -97,6 +114,8 @@ public class CreatePin : MonoBehaviour
         // Show in console marker label.
         Debug.Log(marker.label);
     }
+
+
 
     private Texture2D itemLocated(string item){
         if(item.IndexOf("ambulance", StringComparison.OrdinalIgnoreCase) >= 0) return ambulance;
@@ -135,6 +154,27 @@ public class CreatePin : MonoBehaviour
             GameObject.Find("Quad").GetComponent<MeshRenderer>().material = offToggle;
             GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = "";
             flag = 0;
+        }
+    }
+
+    public void OnButtonMoreClick(){
+        if (flag == 1 && GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text.Length > 5) {
+            if(roundCoords == 0){
+                roundCoords = 1;
+                string label = GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text;
+                label.Replace(label.Substring(label.IndexOf('L'), label.IndexOf('S')), "Lat: " + latit + 
+                            ", Lon: " + longit + System.Environment.NewLine + "S");
+
+                GameObject.Find("MapCanvas/ButtonMore/TextMoreLess").GetComponent<TextMeshPro>().text = "Less";
+            }
+            else{
+                roundCoords = 0;
+                string label = GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text;
+                label.Replace(label.Substring(label.IndexOf('L'), label.IndexOf('S')), "Lat: " + Math.Round(latit, 3) + 
+                            ", Lon: " + Math.Round(longit, 3) + System.Environment.NewLine + "S");
+
+                GameObject.Find("MapCanvas/ButtonMore/TextMoreLess").GetComponent<TextMeshPro>().text = "More";
+            }
         }
     }
 }
