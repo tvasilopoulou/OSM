@@ -11,7 +11,6 @@ using UnityEngine;
 using System.Net;
 using UnityEngine.UI;
 
-
 public class Routes : MonoBehaviour
 {
     [Serializable]
@@ -64,7 +63,10 @@ public class Routes : MonoBehaviour
                 routeLine.Add(new Vector2((float)loc.lon,(float)loc.lat));
 
             }
-            OnlineMapsDrawingElementManager.AddItem(new OnlineMapsDrawingPoly(routeLine, Color.red, 1, new Color(1, 1, 1, 0.5f)));
+            OnlineMapsDrawingPoly poly = new OnlineMapsDrawingPoly(routeLine, Color.red, 1, new Color(1, 1, 1, 0.5f));
+            poly.checkMapBoundaries = false;
+            OnlineMapsDrawingElementManager.AddItem(poly);
+
 
             // OnlineMapsDrawingElementManager.AddItem(new OnlineMapsDrawingLine(routeLine, Color.black, 2));
             // if (polygon == null)

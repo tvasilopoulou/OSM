@@ -162,18 +162,21 @@ public class CreatePin : MonoBehaviour
             if(roundCoords == 0){
                 roundCoords = 1;
                 string label = GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text;
-                label.Replace(label.Substring(label.IndexOf('L'), label.IndexOf('S')), "Lat: " + latit + 
-                            ", Lon: " + longit + System.Environment.NewLine + "S");
+                label = label.Replace(label.Substring(label.IndexOf('L'), label.IndexOf('S')), "Lat: " + latit + 
+                             ", Lon: " + longit + System.Environment.NewLine + "Speed: ");
+                Debug.Log(label.Substring(label.IndexOf('L'), label.IndexOf('S')));
+                GameObject.Find("MapCanvas/MapText").GetComponent<TextMeshProUGUI>().text = label;
 
-                GameObject.Find("MapCanvas/ButtonMore/TextMoreLess").GetComponent<TextMeshPro>().text = "Less";
+                GameObject.Find("MapCanvas/Info/ButtonMore/TextMoreLess").GetComponent<TextMeshPro>().text = "Less";
             }
             else{
                 roundCoords = 0;
                 string label = GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text;
-                label.Replace(label.Substring(label.IndexOf('L'), label.IndexOf('S')), "Lat: " + Math.Round(latit, 3) + 
-                            ", Lon: " + Math.Round(longit, 3) + System.Environment.NewLine + "S");
+                label = label.Replace(label.Substring(label.IndexOf('L'), label.IndexOf('S')), "Lat: " + Math.Round(latit, 3) + 
+                            ", Lon: " + Math.Round(longit, 3) + System.Environment.NewLine + "Speed: ");
+                GameObject.Find("MapCanvas/MapText").GetComponent<TextMeshProUGUI>().text = label;
 
-                GameObject.Find("MapCanvas/ButtonMore/TextMoreLess").GetComponent<TextMeshPro>().text = "More";
+                GameObject.Find("MapCanvas/Info/ButtonMore/TextMoreLess").GetComponent<TextMeshPro>().text = "More";
             }
         }
     }
