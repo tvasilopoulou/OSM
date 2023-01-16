@@ -30,16 +30,14 @@ public class CreatePin : MonoBehaviour
     
     private List<OnlineMapsMarker> OnlineMapsMarkerList;
     private List<string> IDList;
-    private GameObject tooltip;
-    private GameObject tooltipUGV;
 
-    public OnlineMapsRawImageTouchForwarder forwarder;
 
-    public GameObject tooltipPrefab;
-    public GameObject tooltipUGVPrefab;
     public Canvas container;
     public Material onToggle;
     public Material offToggle;
+
+    public GameObject more;
+    public GameObject moreUGV;
 
     private int flag = 0;
     private int flagUGV = 0;
@@ -65,6 +63,10 @@ public class CreatePin : MonoBehaviour
         map = OnlineMaps.instance;
         OnlineMapsMarkerList = new List<OnlineMapsMarker>();
         IDList = new List<string>();
+
+        more.SetActive(false);
+        moreUGV.SetActive(false);
+
         Positions.OnReceived += Place;
         
     }
@@ -152,11 +154,13 @@ public class CreatePin : MonoBehaviour
     public void onInfoClick(){
         if (flag == 0){
             GameObject.Find("Quad").GetComponent<MeshRenderer>().material = onToggle;
+            more.SetActive(true);
             flag= 1;
         }
         else {
             GameObject.Find("Quad").GetComponent<MeshRenderer>().material = offToggle;
             GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = "";
+            more.SetActive(false);
             flag = 0;
         }
     }
@@ -164,12 +168,13 @@ public class CreatePin : MonoBehaviour
     public void onInfoUGVClick(){
         if (flagUGV == 0){
             GameObject.Find("QuadUGV").GetComponent<MeshRenderer>().material = onToggle;
-            Debug.Log("Hello");
+            moreUGV.SetActive(true);
             flagUGV= 1;
         }
         else {
             GameObject.Find("QuadUGV").GetComponent<MeshRenderer>().material = offToggle;
             GameObject.Find("MapTextUGV").GetComponent<TextMeshProUGUI>().text = "";
+            moreUGV.SetActive(false);
             flagUGV = 0;
         }
     }
