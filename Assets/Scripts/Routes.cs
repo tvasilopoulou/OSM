@@ -32,7 +32,6 @@ public class Routes : MonoBehaviour
     }
 
     private OnlineMaps map;
-    private OnlineMapsDrawingPoly polygon = null;
     public float borderWidth = 1;
 
     
@@ -43,9 +42,6 @@ public class Routes : MonoBehaviour
     }
 
     void CreateRoutes(string jsonMessage){
-
-        // List <Vector2> routeLine = new List <Vector2>();
-
         // break down received message
         RoutesClass routesClass = JsonUtility.FromJson<RoutesClass>(jsonMessage);
         Location location = new Location();
@@ -67,19 +63,7 @@ public class Routes : MonoBehaviour
             poly.checkMapBoundaries = false;
             OnlineMapsDrawingElementManager.AddItem(poly);
 
-
-            // OnlineMapsDrawingElementManager.AddItem(new OnlineMapsDrawingLine(routeLine, Color.black, 2));
-            // if (polygon == null)
-            // {
-            //     // For points, reference to markerPositions. 
-            //     // If you change the values ​​in markerPositions, value in the polygon will be adjusted automatically.
-            //     polygon = new OnlineMapsDrawingPoly(routeLine, Color.black, borderWidth, new Color(1, 1, 1, 0.3f));
-
-            //     // Add an element to the map.
-            //     OnlineMapsDrawingElementManager.AddItem(polygon);
-            // }
             routeLine = null;
-            polygon = null;
 
         }
 

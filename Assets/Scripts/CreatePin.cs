@@ -31,15 +31,18 @@ public class CreatePin : MonoBehaviour
     private List<OnlineMapsMarker> OnlineMapsMarkerList;
     private List<string> IDList;
     private GameObject tooltip;
+    private GameObject tooltipUGV;
 
     public OnlineMapsRawImageTouchForwarder forwarder;
 
     public GameObject tooltipPrefab;
+    public GameObject tooltipUGVPrefab;
     public Canvas container;
     public Material onToggle;
     public Material offToggle;
 
     private int flag = 0;
+    private int flagUGV = 0;
     private int roundCoords = 0;
 
     protected double latit;
@@ -83,14 +86,14 @@ public class CreatePin : MonoBehaviour
             roundedLon = data.longitude;
         }
 
-
         string label = data.item.ToUpper() + data.id + System.Environment.NewLine + "Lat: " + roundedLat + ", Lon: " + roundedLon + System.Environment.NewLine + 
                         "Speed: " + data.speed + "m/s" + System.Environment.NewLine + "Altitude: " + data.altitude + "m";
         
         if(!IDList.Contains(data.item + data.id)){
             OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2(data.longitude,data.latitude), itemLocated(data.item), label);
             marker.OnClick += OnMarkerClick;
-            if (flag == 1) GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
+            if (flag == 1 && data.item.ToUpper() == "UAV") GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
+            if (flagUGV == 1 && data.item.ToUpper() == "UGV") GameObject.Find("MapTextUGV").GetComponent<TextMeshProUGUI>().text = label;
             marker.scale = 0.5f;
             OnlineMapsMarkerList.Add(marker);
             IDList.Add(data.item + data.id);
@@ -101,7 +104,8 @@ public class CreatePin : MonoBehaviour
                 if(marker.label.Contains(data.item.ToUpper() + data.id)){
                     marker.position = new Vector2(data.longitude,data.latitude);
                     marker.label = label;
-                    if (flag == 1) GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
+                    if (flag == 1 && data.item.ToUpper() == "UAV") GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text = label;
+                    if (flagUGV == 1 && data.item.ToUpper() == "UGV") GameObject.Find("MapTextUGV").GetComponent<TextMeshProUGUI>().text = label;
                     map.Redraw();
                     break;
                 }
@@ -157,6 +161,19 @@ public class CreatePin : MonoBehaviour
         }
     }
 
+    public void onInfoUGVClick(){
+        if (flagUGV == 0){
+            GameObject.Find("QuadUGV").GetComponent<MeshRenderer>().material = onToggle;
+            Debug.Log("Hello");
+            flagUGV= 1;
+        }
+        else {
+            GameObject.Find("QuadUGV").GetComponent<MeshRenderer>().material = offToggle;
+            GameObject.Find("MapTextUGV").GetComponent<TextMeshProUGUI>().text = "";
+            flagUGV = 0;
+        }
+    }
+
     public void OnButtonMoreClick(){
         if (flag == 1 && GameObject.Find("MapText").GetComponent<TextMeshProUGUI>().text.Length > 5) {
             if(roundCoords == 0){
@@ -180,4 +197,30 @@ public class CreatePin : MonoBehaviour
             }
         }
     }
+
+    public void OnUGVButtonMoreClick(){
+        if (flagUGV == 1 && GameObject.Find("MapTextUGV").GetComponent<TextMeshProUGUI>().text.Length > 5) {
+            if(roundCoords == 0){
+                roundCoords = 1;
+                string label = GameObject.Find("MapTextUGV").GetComponent<TextMeshProUGUI>().text;
+                label = label.Replace(label.Substring(label.IndexOf('L'), label.IndexOf('S')), "Lat: " + latit + 
+                             ", Lon: " + longit + System.Environment.NewLine + "Speed: ");
+                Debug.Log(label.Substring(label.IndexOf('L'), label.IndexOf('S')));
+                GameObject.Find("MapCanvas/MapTextUGV").GetComponent<TextMeshProUGUI>().text = label;
+
+                GameObject.Find("MapCanvas/InfoUGV/ButtonMore/TextMoreLess").GetComponent<TextMeshPro>().text = "Less";
+            }
+            else{
+                roundCoords = 0;
+                string label = GameObject.Find("MapTextUGV").GetComponent<TextMeshProUGUI>().text;
+                label = label.Replace(label.Substring(label.IndexOf('L'), label.IndexOf('S')), "Lat: " + Math.Round(latit, 3) + 
+                            ", Lon: " + Math.Round(longit, 3) + System.Environment.NewLine + "Speed: ");
+                GameObject.Find("MapCanvas/MapTextUGV").GetComponent<TextMeshProUGUI>().text = label;
+
+                GameObject.Find("MapCanvas/InfoUGV/ButtonMore/TextMoreLess").GetComponent<TextMeshPro>().text = "More";
+            }
+        }
+    }
+    
+
 }
