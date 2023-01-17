@@ -38,11 +38,11 @@ public class GeneralSystemInfo : MonoBehaviour
 
         GUIStyle style = new GUIStyle();
 
-        Rect rect = new Rect(-40, 100 + (h * 4 / 100 + 10), w, h * 2 / 100);
+        Rect rect = new Rect(-200, 100 + (h * 4 / 100 + 10), w, h * 2 / 100);
         style.alignment = TextAnchor.UpperRight;
-        style.fontSize = h * 2 / 100;
+        style.fontSize = h * 2 / 60;
         //style.normal.textColor = new Color(255, 255, 255, 255);
-        style.normal.textColor = Color.blue;
+        style.normal.textColor = Color.green;
 
         batteryStatus.text = SystemInfo.batteryStatus.ToString();
 
@@ -65,7 +65,7 @@ public class GeneralSystemInfo : MonoBehaviour
         }
         batteryLevel.text = level.ToString("F2") + "%";
 
-        string text = string.Format("Battery Status: {0:0.0} %", level);
+        string text = string.Format("Batt. Lvl.: {0:0.0} %", level);
         text += " " + status;
         GUI.Label(rect, text, style);
     }
