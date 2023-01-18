@@ -78,7 +78,7 @@ public class CreatePin : MonoBehaviour
         latit = data.latitude;
         longit = data.longitude;
 
-        if(data.speed == "0") return;
+        //if(data.speed == "0") return;
 
         double roundedLat = Math.Round(data.latitude, 3);
         double roundedLon = Math.Round(data.longitude, 3);
