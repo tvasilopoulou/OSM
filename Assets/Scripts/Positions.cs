@@ -58,7 +58,7 @@ public class Positions : MonoBehaviour
         try
         {
             webSocket = new ClientWebSocket();
-            Debug.Log("Connecting TO " + url);
+            //Debug.Log("Connecting TO " + url);
             await webSocket.ConnectAsync(new Uri(url), CancellationToken.None);
         }
         catch (Exception e)
@@ -67,9 +67,9 @@ public class Positions : MonoBehaviour
             Debug.LogError(e);
         }
 
-        Debug.Log("receiving message.");
+        //Debug.Log("receiving message.");
         await Receive();
-        Debug.LogError("THIS SHOULD NOT PRINT.");
+        //Debug.LogError("THIS SHOULD NOT PRINT.");
 
     }
 
@@ -93,7 +93,7 @@ public class Positions : MonoBehaviour
 
             using (var ms = new MemoryStream())
             {
-                Debug.Log("start");
+                //Debug.Log("start");
 
                 do
                 {
@@ -121,18 +121,7 @@ public class Positions : MonoBehaviour
 
                         text.text = message;
                         Debug.Log(message);
-                        // PositionDataType data = JsonUtility.FromJson<PositionDataType>(message);
 
-                        // // this is needed to have the correct decimal digits!!
-                        // data.latitude = Math.Round(data.latitude, 4, MidpointRounding.ToEven);
-                        // data.longitude = Math.Round(data.longitude, 4, MidpointRounding.ToEven);
-
-                        // text.text = data.message_type + " " + data.latitude + " " + data.longitude + " " + data.speed+ " " + data.distance;
-                        // data.print();
-
-                        //must be delete in case of threads 
-                        //await Task.Run(Process);
-                        //the call may happen elseware
                         if (OnReceived != null) OnReceived(message);
                     }
                 }else if(result.MessageType == WebSocketMessageType.Close)

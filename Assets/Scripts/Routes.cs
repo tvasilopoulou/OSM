@@ -54,9 +54,8 @@ public class Routes : MonoBehaviour
 
             foreach(Location loc in route.vertices){
                 //loc.latitude, loc.longitude -> waypoint
-
                 OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2((float)loc.lon,(float)loc.lat));
-                routeLine.Add(new Vector2((float)loc.lon,(float)loc.lat));
+                routeLine.Add(new Vector2((float)loc.lat,(float)loc.lon));
 
             }
             OnlineMapsDrawingPoly poly = new OnlineMapsDrawingPoly(routeLine, Color.red, 1, new Color(1, 1, 1, 0.5f));

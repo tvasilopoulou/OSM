@@ -40,7 +40,7 @@ public class GeneralSystemInfo : MonoBehaviour
 
         Rect rect = new Rect(-200, 100 + (h * 4 / 100 + 10), w, h * 2 / 100);
         style.alignment = TextAnchor.UpperRight;
-        style.fontSize = h * 2 / 60;
+        style.fontSize = h * 2 / 70;
         //style.normal.textColor = new Color(255, 255, 255, 255);
         style.normal.textColor = Color.green;
 
@@ -56,7 +56,7 @@ public class GeneralSystemInfo : MonoBehaviour
         }else if(level < 30.0f)
         {
             //the text has to be larger in order to warn the user
-            style.fontSize = h * 4 / 100;
+            style.fontSize = h * 4 / 60;
             style.normal.textColor = Color.red;
         }
         else
@@ -70,28 +70,8 @@ public class GeneralSystemInfo : MonoBehaviour
         GUI.Label(rect, text, style);
     }
 
-    // void DrawLidarValues()
-    // {
-    //     int w = Screen.width, h = Screen.height;
-
-    //     GUIStyle style = new GUIStyle();
-
-    //     Rect rect = new Rect(40, h - 200 - (h * 3 / 100 + 10), w, h * 3 / 100);
-    //     style.alignment = TextAnchor.UpperRight;
-    //     style.fontSize = h * 2 / 100;
-    //     style.normal.textColor = Color.cyan;
-
-    //     // returns a random number between 0 and 100
-    //     float randomNumber = Random.Range(0, 100);
-
-    //     string text = string.Format("LIDAR : {0:0.0} Lidar measure", randomNumber);
-    //     GUI.Label(rect, text, style);
-    // }
-
     void OnGUI()
     {
-        //if (showFps) DrawFps();
-        DrawBatteryInfo();
-        // DrawLidarValues();
+                DrawBatteryInfo();
     }
 }
