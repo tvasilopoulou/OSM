@@ -19,16 +19,22 @@ public class Routes : MonoBehaviour
         public double lon;
     }
 
+
     [Serializable]
     public class Route{
-        public Location [] vertices;
         public string name;
         public string type;
+        public Location [] vertices = null;
+        public Location center = null;
+        public float radius = 0.0F;
+
     }
+
+
 
     [Serializable]
     public class RoutesClass{
-        public Route [] routes;
+        public Route [] areas;
     }
 
     private OnlineMaps map;
@@ -43,33 +49,32 @@ public class Routes : MonoBehaviour
 
     void CreateRoutes(string jsonMessage){
         // break down received message
+        // Debug.Log(jsonMessage);
         RoutesClass routesClass = JsonUtility.FromJson<RoutesClass>(jsonMessage);
+        // Debug.Log(routesClass.areas[0].name);
         Location location = new Location();
 
-        // for every route
-        foreach(Route route in routesClass.routes){
-            Debug.Log(route.name);
-        
+        // // for every route
+        foreach(Route route in routesClass.areas){
+            // Debug.Log(route.vertices[0]);
+            if (route.radius > 0.0f){ Debug.Log("bye"); continue;}
             List <Vector2> routeLine = new List <Vector2>();
+                foreach(Location loc in route.vertices){
+                    Debug.Log(loc);
+                    //loc.latitude, loc.longitude -> waypoint
+                    Debug.Log(loc.lon);
+                    OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2((float)loc.lon,(float)loc.lat));
+                    routeLine.Add(new Vector2((float)loc.lon,(float)loc.lat));
 
-            foreach(Location loc in route.vertices){
-                //loc.latitude, loc.longitude -> waypoint
+                }
+                OnlineMapsDrawingPoly poly = new OnlineMapsDrawingPoly(routeLine, Color.red, 1, new Color(1, 1, 1, 0.5f));
+                poly.checkMapBoundaries = false;
+                OnlineMapsDrawingElementManager.AddItem(poly);
 
-                OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2((float)loc.lon,(float)loc.lat));
-                routeLine.Add(new Vector2((float)loc.lon,(float)loc.lat));
-
-            }
-            OnlineMapsDrawingPoly poly = new OnlineMapsDrawingPoly(routeLine, Color.red, 1, new Color(1, 1, 1, 0.5f));
-            poly.checkMapBoundaries = false;
-            OnlineMapsDrawingElementManager.AddItem(poly);
-
-            routeLine = null;
-
+                routeLine = null;
         }
-
-
-
     }
+
 
     
 }

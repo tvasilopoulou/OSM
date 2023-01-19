@@ -21,7 +21,7 @@ public class Positions : MonoBehaviour
     private ConcurrentQueue<string> messageQueue = new ConcurrentQueue<string>();
 
     [SerializeField]
-    private string url = "ws://195.134.66.232:7000/broker";
+    private string url = "ws://195.134.66.232:6999/broker";
 
     // class PositionDataType{
     //     public string message_type;
@@ -114,13 +114,14 @@ public class Positions : MonoBehaviour
                         if (message.Contains("New Session with id")){
                             continue;
                         }
-                        else if(message.Contains("routes")){
+                        else if(message.Contains("areas")){
                             OnRoutesReceived(message);
                             continue;
                         }
-
+                        else continue;
                         text.text = message;
-                        Debug.Log(message);
+
+                        // Debug.Log(message);
                         // PositionDataType data = JsonUtility.FromJson<PositionDataType>(message);
 
                         // // this is needed to have the correct decimal digits!!
