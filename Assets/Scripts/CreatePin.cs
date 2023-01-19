@@ -68,6 +68,7 @@ public class CreatePin : MonoBehaviour
         moreUGV.SetActive(false);
 
         Positions.OnReceived += Place;
+        map.zoom = 17;
         
     }
 
@@ -148,7 +149,7 @@ public class CreatePin : MonoBehaviour
     }
 
     public void OnMinusClick(){
-        if (map.zoom >= 1) map.zoom -= 1;
+        if (map.zoom >= 17) map.zoom -= 1;
     }
 
     public void onInfoClick(){
