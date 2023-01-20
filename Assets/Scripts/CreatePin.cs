@@ -74,11 +74,12 @@ public class CreatePin : MonoBehaviour
     void Place(string jsonMessage)
     {
         Telemetry data = JsonUtility.FromJson<Telemetry>(jsonMessage);
-        
+        Debug.Log(jsonMessage);
         latit = data.latitude;
         longit = data.longitude;
 
-        if(data.speed == "0") return;
+        // if(data.speed == "0") return;
+        if(data.item == "teamsecurity") return;
 
         double roundedLat = Math.Round(data.latitude, 3);
         double roundedLon = Math.Round(data.longitude, 3);

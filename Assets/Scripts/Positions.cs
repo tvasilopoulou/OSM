@@ -21,7 +21,7 @@ public class Positions : MonoBehaviour
     private ConcurrentQueue<string> messageQueue = new ConcurrentQueue<string>();
 
     [SerializeField]
-    private string url = "ws://195.134.66.232:6999/broker";
+    private string url = "ws://195.134.66.232:7000/broker";
 
     // class PositionDataType{
     //     public string message_type;
@@ -118,7 +118,6 @@ public class Positions : MonoBehaviour
                             OnRoutesReceived(message);
                             continue;
                         }
-                        else continue;
                         text.text = message;
 
                         // Debug.Log(message);

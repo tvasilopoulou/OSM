@@ -39,6 +39,7 @@ public class Routes : MonoBehaviour
 
     private OnlineMaps map;
     public float borderWidth = 1;
+    private bool flag = false;
 
     
     void Start()
@@ -58,15 +59,20 @@ public class Routes : MonoBehaviour
         foreach(Route route in routesClass.areas){
             // Debug.Log(route.vertices[0]);
             if (route.radius > 0.0f){ Debug.Log("bye"); continue;}
+            flag = false;
             List <Vector2> routeLine = new List <Vector2>();
                 foreach(Location loc in route.vertices){
                     Debug.Log(loc);
+                    if (loc.lat > 40.0f){
+                        flag = true;
+                        break;
+                    }
                     //loc.latitude, loc.longitude -> waypoint
-                    Debug.Log(loc.lon);
                     OnlineMapsMarker marker = OnlineMapsMarkerManager.CreateItem(new Vector2((float)loc.lon,(float)loc.lat));
                     routeLine.Add(new Vector2((float)loc.lon,(float)loc.lat));
 
                 }
+                if (flag == true) continue;
                 OnlineMapsDrawingPoly poly = new OnlineMapsDrawingPoly(routeLine, Color.red, 1, new Color(1, 1, 1, 0.5f));
                 poly.checkMapBoundaries = false;
                 OnlineMapsDrawingElementManager.AddItem(poly);
